@@ -31,15 +31,16 @@
         },
         {
             /* 账号3 */
-            "vdevice_qimei36": "",
-            "vqq_appid": "",
-            "vqq_openid": "",
-            "vqq_access_token": "",
-            "vqq_vuserid": "",
-            "main_login": "",
+            "tag": "浪人海洋",
+            "vdevice_qimei36": "086ece9bdffb376707adb93c00001dd14b08",
+            "vqq_appid": "1000005",
+            "vqq_openid": "40E50DA354C5280B2971A30F96596EF8",
+            "vqq_access_token": "90C0C3CA343BC329EB18755038CA7BB7",
+            "vqq_vuserid": "557947551",
+            "main_login": "qq",
             "ip": "39.144.36.110",
             /* 是否开启 */
-            "enable": "False"
+            "enable": "True"
         }
     ],
     "push": {
