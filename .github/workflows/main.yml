@@ -18,7 +18,8 @@ jobs:
       - name: Set up Python 3.6
         uses: actions/setup-python@v3
         with:
-          python-version: 3.6 # 使用适当的 Python 版本
+          python-version: 3.6.15 # 使用适当的 Python 版本
+          architecture: 'x64'  # 手动指定架构为 x64
 
       - name: Install dependencies
         run: |
