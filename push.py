@@ -101,8 +101,8 @@ def pushplus(content):
 
 def main(content):
     print(content)
-    WeCom(content)
-    Ding(content)
-    pushplus(content)
+    #WeCom(content)
+    #Ding(content)
+    #pushplus(content)
 
 
