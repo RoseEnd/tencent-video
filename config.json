@@ -3,37 +3,10 @@
     "version": "1.06",
     "users": [
         {
-            "tag": "等花开",
-            /* 填写cookie中某些段 */
-            "vdevice_qimei36": "066a2100012316509",
-            "vqq_appid": "104",
-            "vqq_openid": "C51C0A429312322BDB",
-            "vqq_access_token": "08A8606E2190",
-            "vqq_vuserid": "227",
-            "main_login": "qq",
-            "ip": "39.144.36.110",
-            /* 是否开启 */
-            "enable": "False"
-        },
-        {
-            /* 账号2 */
-            "tag": "raindrop",
-            /* 填写cookie中某些段 */
-            "vdevice_qimei36": "066ab9df6590012316509",
-            "vqq_appid": "1014",
-            "vqq_openid": "3E68D4BDBAE9087CB42E",
-            "vqq_access_token": "2B36FC45E3959216",
-            "vqq_vuserid": "378",
-            "main_login": "qq",
-            "ip": "39.144.36.110",
-            /* 是否开启 */
-            "enable": "False"
-        },
-        {
-            /* 账号3 */
+            /* 账号1 */
             "tag": "浪人海洋",
             "vdevice_qimei36": "086ece9bdffb376707adb93c00001dd14b08",
-            "vqq_appid": "1000005",
+            "vqq_appid": "101795054",
             "vqq_openid": "40E50DA354C5280B2971A30F96596EF8",
             "vqq_access_token": "90C0C3CA343BC329EB18755038CA7BB7",
             "vqq_vuserid": "557947551",
