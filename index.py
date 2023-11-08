@@ -28,6 +28,7 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
     #cookie='vdevice_qimei36='+qimei36+';vqq_appid='+appid+';vqq_openid='+openid+';vqq_access_token='+access_token+';main_login='+login
     cookie = 'vdevice_qimei36='+qimei36+';vqq_appid=' + appid + ';vqq_openid=' + openid + ';vqq_access_token=' + access_token + ';main_login=' + login + ';vqq_vuserid=' + vuserid + ';ip=' + ip
     log=''
+    title='TV:签到异常'
     time_1 = int(time.time())
     time_2 = time.localtime(time_1)
     now = time.strftime("%Y-%m-%d %H:%M:%S", time_2)
@@ -85,6 +86,7 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
     try:
         res_1 = json.loads(response_1.text)
         log = log + "\n签到获得v力值:" + str(res_1['check_in_score'])
+        title = 'TV:获得V力值:' + str(res_1['check_in_score'])
         print(res_1)
     except:
         try:
@@ -131,7 +133,7 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
                 log=log+'\n标题:'+i["task_maintitle"]+'\n状态:'+i["task_subtitle"]
     except:
         log = log + "获取状态异常，可能是cookie失效"
-    print(push.main(log))
+    print(push.main(log, title))
 
 def config():
     path = os.getcwd()

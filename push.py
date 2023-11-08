@@ -7,6 +7,8 @@
 # @File    : push.py
 
 import requests, json,os,re
+import urllib.parse
+import urllib.request
 
 def config():
     path = os.getcwd()
@@ -99,7 +101,18 @@ def pushplus(content):
     except:
         print('推送失败')
 
-def main(content):
+
+def sc_send(text, desp='', key='[SENDKEY]'):
+    postdata = urllib.parse.urlencode(
+        {'text': text, 'desp': desp}).encode('utf-8')
+    url = f'https://sctapi.ftqq.com/{key}.send'
+    req = urllib.request.Request(url, data=postdata, method='POST')
+    with urllib.request.urlopen(req) as response:
+        result = response.read().decode('utf-8')
+    return result
+
+def main(content,title=''):
+    print(sc_send(title, content, os.getenv('SEND_KEY')))
     print(content)
     #WeCom(content)
     #Ding(content)
