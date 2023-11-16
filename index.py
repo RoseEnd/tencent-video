@@ -21,19 +21,28 @@ import os
 '''
 '''腾讯视频签到'''
 
-
-
-
 def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
     #cookie='vdevice_qimei36='+qimei36+';vqq_appid='+appid+';vqq_openid='+openid+';vqq_access_token='+access_token+';main_login='+login
     cookie = 'vdevice_qimei36='+qimei36+';vqq_appid=' + appid + ';vqq_openid=' + openid + ';vqq_access_token=' + access_token + ';main_login=' + login + ';vqq_vuserid=' + vuserid + ';ip=' + ip
-    log=''
-    title='TV:签到异常'
     time_1 = int(time.time())
     time_2 = time.localtime(time_1)
     now = time.strftime("%Y-%m-%d %H:%M:%S", time_2)
     log = "腾讯视频会员签到执行任务\n--------------raindrop--------------\n" + now + '\ntag:' + tag
+    #签到
+    t1,l1 = signIn(cookie)
     #积分查询
+    t2,l2 = integral(cookie)
+
+    log = log + '\n'  + l1 + '\n'  + l2
+
+    print(push.main(log, t1+t2))
+
+
+# integral 积分和会员时长查询
+def integral(cookie):
+    # 积分查询
+    log = ''
+    title = ''
     url_3 = 'https://vip.video.qq.com/fcgi-bin/comm_cgi?name=spp_vscore_user_mashup&cmd=&otype=xjson&type=1'
     headers_3 = {
         'user-agent': 'Mozilla/5.0 (Linux; Android 11; M2104K10AC Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/046237 Mobile Safari/537.36 QQLiveBrowser/8.7.85.27058',
@@ -45,6 +54,7 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
         res_3 = json.loads(response_3.text)
         log = log + "\n会员等级:" + str(res_3['lscore_info']['level']) + "\n积分:" + str(
             res_3['cscore_info']['vip_score_total']) + "\nV力值:" + str(res_3['lscore_info']['score'])
+        title = "共" + str(res_3['lscore_info']['score'])
     except:
         try:
             res_3 = json.loads(response_3.text)
@@ -74,15 +84,22 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
             print(res_3)
         except:
             log = log + "\n腾讯视频获取积分异常,无法返回内容"
+    return title,log
+
+
+#执行签到
+def signIn(cookie):
     # 签到
+    log = ''
     url_1 = 'https://vip.video.qq.com/rpc/trpc.new_task_system.task_system.TaskSystem/CheckIn?rpc_data=%7B%7D'
     headers_1 = {
         'user-agent': 'Mozilla/5.0 (Linux; Android 11; M2104K10AC Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/046237 Mobile Safari/537.36 QQLiveBrowser/8.7.85.27058',
         'Content-Type': 'application/json',
         'referer': 'https://film.video.qq.com/x/vip-center/?entry=common&hidetitlebar=1&aid=V0%24%241%3A0%242%3A8%243%3A8.7.85.27058%244%3A3%245%3A%246%3A%247%3A%248%3A4%249%3A%2410%3A&isDarkMode=0',
         'cookie': cookie
-        }
+    }
     response_1 = requests.get(url_1, headers=headers_1)
+    title = ''
     try:
         res_1 = json.loads(response_1.text)
         log = log + "\n签到获得v力值:" + str(res_1['check_in_score'])
@@ -92,17 +109,25 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
         try:
             res_1 = json.loads(response_1.text)
             log = log + "\n腾讯视频签到异常，返回内容：\n" + str(res_1)
+            title = 'TV:签到异常'
             print(res_1)
         except:
             log = log + "\n腾讯视频签到异常，无法返回内容"
+            title = 'TV:签到异常'
+    return title,log
+
+
+#每月上限100V力值，暂不请求该接口
+def watch(cookie):
     # 观看
+    log = ''
     url_2 = 'https://vip.video.qq.com/rpc/trpc.new_task_system.task_system.TaskSystem/ProvideAward?rpc_data=%7B%22task_id%22:1%7D'
     headers_2 = {
         'user-agent': 'Mozilla/5.0 (Linux; Android 11; M2104K10AC Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/046237 Mobile Safari/537.36 QQLiveBrowser/8.7.85.27058',
         'Content-Type': 'application/json',
         'referer': 'https://film.video.qq.com/x/vip-center/?entry=common&hidetitlebar=1&aid=V0%24%241%3A0%242%3A8%243%3A8.7.85.27058%244%3A3%245%3A%246%3A%247%3A%248%3A4%249%3A%2410%3A&isDarkMode=0',
         'cookie': cookie
-        }
+    }
     response_2 = requests.get(url_2, headers=headers_2)
     try:
         res_2 = json.loads(response_2.text)
@@ -116,24 +141,28 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
         except:
             log = log + "\n腾讯视频领取观看v力值异常,无法返回内容"
 
-    #任务状态
-    url='https://vip.video.qq.com/rpc/trpc.new_task_system.task_system.TaskSystem/ReadTaskList?rpc_data=%7B%22business_id%22:%221%22,%22platform%22:3%7D'
-    headers={'user-agent':'Mozilla/5.0 (Linux; Android 11; M2104K10AC Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/046237 Mobile Safari/537.36 QQLiveBrowser/8.7.85.27058',
-             'Content-Type':'application/json',
-             'referer':'https://film.video.qq.com/x/vip-center/?entry=common&hidetitlebar=1&aid=V0%24%241%3A0%242%3A8%243%3A8.7.85.27058%244%3A3%245%3A%246%3A%247%3A%248%3A4%249%3A%2410%3A&isDarkMode=0',
-             'cookie':cookie
-             }
-    response = requests.get(url,headers=headers)
+
+#获取任务状态
+def jobStatus(cookie):
+    # 任务状态
+    log = ''
+    url = 'https://vip.video.qq.com/rpc/trpc.new_task_system.task_system.TaskSystem/ReadTaskList?rpc_data=%7B%22business_id%22:%221%22,%22platform%22:3%7D'
+    headers = {'user-agent': 'Mozilla/5.0 (Linux; Android 11; M2104K10AC Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/046237 Mobile Safari/537.36 QQLiveBrowser/8.7.85.27058',
+               'Content-Type': 'application/json',
+               'referer': 'https://film.video.qq.com/x/vip-center/?entry=common&hidetitlebar=1&aid=V0%24%241%3A0%242%3A8%243%3A8.7.85.27058%244%3A3%245%3A%246%3A%247%3A%248%3A4%249%3A%2410%3A&isDarkMode=0',
+               'cookie': cookie
+               }
+    response = requests.get(url, headers=headers)
     try:
         res = json.loads(response.text)
-        lis=res["task_list"]
+        lis = res["task_list"]
         log = log + '\n---------v力值任务状态----------'
         for i in lis:
-            if i["task_button_desc"]=='已完成':
-                log=log+'\n标题:'+i["task_maintitle"]+'\n状态:'+i["task_subtitle"]
+            if i["task_button_desc"] == '已完成':
+                log = log+'\n标题:'+i["task_maintitle"] + \
+                    '\n状态:'+i["task_subtitle"]
     except:
         log = log + "获取状态异常，可能是cookie失效"
-    print(push.main(log, title))
 
 def config():
     path = os.getcwd()
