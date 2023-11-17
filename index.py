@@ -27,7 +27,7 @@ def ten_video(tag,qimei36,appid,openid,access_token,vuserid,login,ip):
     time_1 = int(time.time())
     time_2 = time.localtime(time_1)
     now = time.strftime("%Y-%m-%d %H:%M:%S", time_2)
-    log = "腾讯视频会员签到执行任务\n--------------raindrop--------------\n" + now + '\ntag:' + tag
+    log = '腾讯视频会员签到执行任务\n--------------raindrop--------------\n' + now + '\ntag:' + tag
     #签到
     t1,l1 = signIn(cookie)
     #积分查询
@@ -52,16 +52,16 @@ def integral(cookie):
     response_3 = requests.get(url_3, headers=headers_3)
     try:
         res_3 = json.loads(response_3.text)
-        log = log + "\n会员等级:" + str(res_3['lscore_info']['level']) + "\n积分:" + str(
-            res_3['cscore_info']['vip_score_total']) + "\nV力值:" + str(res_3['lscore_info']['score'])
-        title = "共" + str(res_3['lscore_info']['score'])
+        log = log + '\n会员等级:' + str(res_3['lscore_info']['level']) + '\n积分:' + str(
+            res_3['cscore_info']['vip_score_total']) + '\nV力值:' + str(res_3['lscore_info']['score'])
+        title = '共' + str(res_3['lscore_info']['score'])
     except:
         try:
             res_3 = json.loads(response_3.text)
-            log = log + "\n腾讯视频领获取积分异常,返回内容:\n" + str(res_3)
+            log = log + '\n腾讯视频领获取积分异常,返回内容:\n' + str(res_3)
             print(res_3)
         except:
-            log = log + "\n腾讯视频获取积分异常,无法返回内容"
+            log = log + '\n腾讯视频获取积分异常,无法返回内容'
     url_3 = 'https://vip.video.qq.com/rpc/trpc.query_vipinfo.vipinfo.QueryVipInfo/GetVipUserInfoH5'
     headers_3 = {
         'user-agent': 'Mozilla/5.0 (Linux; Android 11; M2104K10AC Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/046237 Mobile Safari/537.36 QQLiveBrowser/8.7.85.27058',
@@ -72,7 +72,7 @@ def integral(cookie):
     response_3 = requests.post(url_3, data=data, headers=headers_3)
     try:
         res_3 = json.loads(response_3.text)
-        log = log + "\n开始时间:" + str(res_3['beginTime']) + "\n到期时间:" + str(
+        log = log + '\n开始时间:' + str(res_3['beginTime']) + '\n到期时间:' + str(
             res_3['endTime'])
         if res_3['endmsg'] != '':
             log = log + '\nendmsg:' + res_3['endmsg']
@@ -80,10 +80,10 @@ def integral(cookie):
     except:
         try:
             res_3 = json.loads(response_3.text)
-            log = log + "\n腾讯视频领获取积分异常,返回内容:\n" + str(res_3)
+            log = log + '\n腾讯视频领获取积分异常,返回内容:\n' + str(res_3)
             print(res_3)
         except:
-            log = log + "\n腾讯视频获取积分异常,无法返回内容"
+            log = log + '\n腾讯视频获取积分异常,无法返回内容'
     return title,log
 
 
