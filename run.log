@@ -1974,3 +1974,18 @@ V力值:32522
 到期时间:2024-11-15 20:23:32
 None
 2024-01-28 15:51:30 - 运行日志
+39.144.36.110
+{'ret': -11, 'msg': 'check qq accessToken retCode 65, errMsg type:business, code:65, msg:[backend] verify fail, token expired'}
+{"code":0,"message":"","data":{"pushid":"154140944","readkey":"SCTK5asvjXqYtKS","error":"SUCCESS","errno":0}}
+腾讯视频会员签到执行任务
+--------------raindrop--------------
+2024-01-29 15:51:28
+tag:浪人海洋
+
+腾讯视频签到异常，无法返回内容
+
+腾讯视频领获取积分异常,返回内容:
+{'ret': -11, 'msg': 'check qq accessToken retCode 65, errMsg type:business, code:65, msg:[backend] verify fail, token expired'}
+腾讯视频获取积分异常,无法返回内容
+None
+2024-01-29 15:51:32 - 运行日志
