@@ -3868,3 +3868,27 @@ V力值:36672
 到期时间:2027-01-02 20:23:32
 None
 2024-04-19 15:51:28 - 运行日志
+39.144.36.110
+{'ret': -110009, 'msg': 'security check not pass', 'security_verify': {'iRet': 104, 'sInnerMsg': '', 'sUserMsg': '您还未通过图形验证', 'sBusinessId': 'v_value_achieve', 'sAppId': '2067325355', 'sJumpUrl': '', 'sRemark': 'vip_access.trpc.new_task_system.task_system.TaskSystem.CheckIn'}}
+
+会员等级:6
+积分:110
+V力值:36672
+开始时间:2023-09-21 20:23:32
+到期时间:2027-01-02 20:23:32
+{"code":0,"message":"","data":{"pushid":"162593436","readkey":"SCT3lZMT12ccVEh","error":"SUCCESS","errno":0}}
+腾讯视频会员签到执行任务
+--------------raindrop--------------
+2024-04-20 15:51:24
+tag:浪人海洋
+
+腾讯视频签到异常，返回内容：
+{'ret': -110009, 'msg': 'security check not pass', 'security_verify': {'iRet': 104, 'sInnerMsg': '', 'sUserMsg': '您还未通过图形验证', 'sBusinessId': 'v_value_achieve', 'sAppId': '2067325355', 'sJumpUrl': '', 'sRemark': 'vip_access.trpc.new_task_system.task_system.TaskSystem.CheckIn'}}
+
+会员等级:6
+积分:110
+V力值:36672
+开始时间:2023-09-21 20:23:32
+到期时间:2027-01-02 20:23:32
+None
+2024-04-20 15:51:29 - 运行日志
